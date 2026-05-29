@@ -1,0 +1,15 @@
+# Node dependencies
+node_modules/
+.pnpm-store/
+
+# Python virtual environments
+venv/
+.venv/
+__pycache__/
+*.pyc
+
+# IDEs and OS files
+.vscode/
+.idea/
+.DS_Store
+.env
