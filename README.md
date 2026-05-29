@@ -32,7 +32,7 @@ To make the dashboard truly functional, the application integrates a secondary m
 ##  How it Works under the Hood
 
 1. **The Intent Phase:** The user inputs a text request (e.g., *"Show me marketing spend and a budget slider to simulate acquisition"*).
-2. **The Layout Matrix:** The FastAPI backend wraps this query with an architectural system instruction, prompting the Llama 3.3 engine to return strict structural JSON maps containing specific matching blocks (`MetricCard`, `InteractiveSlider`, `LineChart`).
+2. **The Layout Matrix:** The FastAPI backend wraps this query with an architectural system instruction, prompting the Llama 3.3 engine to return strict structural JSON maps containing specific matching blocks : MetricCard, InteractiveSlider, LineChart).
 3. **The Hydration Phase:** The React frontend parses the incoming structural blueprint using a custom interpreter engine, generating native visual components seamlessly.
 4. **The Simulation Phase:** Interacting with the generated UI blocks fires calculations back to our predictive data endpoint, instantly morphing the underlying chart data values in real-time.
 
@@ -40,5 +40,3 @@ To make the dashboard truly functional, the application integrates a secondary m
 # Activate on Windows:
 .\venv\Scripts\activate
 
-# Install dependencies:
-pip install fastapi uvicorn groq python-dotenv
