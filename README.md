@@ -15,6 +15,20 @@ To make the dashboard truly functional, the application integrates a secondary m
 
 ---
 
+##  System Architecture & Engineering Trade-Offs (Criterion 4)
+
+### 1. Unified Schema Parsing Guardrails
+* **Design Choice:** Implemented `Pydantic` validation schemas (`DashboardLayoutResponse`) directly on the FastAPI REST endpoint.
+* **Trade-off:** This introduces minor latency overhead during JSON parsing, but it provides strict system safety. It guarantees that any non-conforming or hallucinated LLM payloads are intercepted and handled at the server level before they can reach the frontend and crash the client UI grid.
+
+### 2. High-Speed Inference vs. Multi-Cloud Portability
+* **Design Choice:** Selected the Groq SDK (`llama-3.3-70b-versatile`) for local execution while designing standard OpenAI-compatible abstraction layers.
+* **Trade-off:** While a full cloud deployment (e.g., Azure OpenAI or AWS Bedrock) offers enterprise-level security, utilizing Groq dramatically lowers operational computing costs and provides sub-second inference speeds, which is crucial for dynamic, real-time interface synthesis.
+
+### 3. State Mutation vs. Network Traffic
+* **Design Choice:** Offloaded simulation calculations (`/api/v1/simulate-forecast`) to backend REST endpoints rather than processing them client-side in React state.
+* **Trade-off:** This introduces network round-trips when adjusting the slider UI, but it allows the application to handle high-frequency parameter modifications via scalable, stateless Python logic—mirroring real-world enterprise data-streaming architectures.
+
 ##  The Tech Stack
 
 ### Frontend
@@ -36,7 +50,4 @@ To make the dashboard truly functional, the application integrates a secondary m
 3. **The Hydration Phase:** The React frontend parses the incoming structural blueprint using a custom interpreter engine, generating native visual components seamlessly.
 4. **The Simulation Phase:** Interacting with the generated UI blocks fires calculations back to our predictive data endpoint, instantly morphing the underlying chart data values in real-time.
 
-
-# Activate on Windows:
-.\venv\Scripts\activate
 
